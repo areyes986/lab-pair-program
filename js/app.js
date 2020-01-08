@@ -49,12 +49,16 @@ $.ajax('./data/page-1.json', {method: 'GET', dataType: 'JSON'})
 
 // AnimalHorns.prototype.select =
 function hello() {
+  let currentKeyword = [];
   const selectOptions = $('#select').html();
   keywordArray.forEach( arr => {
-    const $newOption = $('<option></option>');
-    $newOption.html(selectOptions);
-    $newOption.find('option').text(arr)
-    $('select').append($newOption)
+    if (currentKeyword.includes(arr) === false){
+      const $newOption = $('<option></option>');
+      $newOption.html(selectOptions);
+      currentKeyword.push(arr)
+      $newOption.find('option').text(arr)
+      $('select').append($newOption)
+    }
   })
 }
 
