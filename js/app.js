@@ -28,6 +28,7 @@ AnimalHorns.prototype.render = function() {
   $newSection.find('img').attr('alt', this.title);
   $newSection.find('p').text(this.description);
   $newSection.find('p').text(this.horns);
+  $newSection.find('img').attr('class', this.keyword);
 
   $('main').append($newSection)
 }
@@ -62,9 +63,16 @@ function hello() {
   })
 }
 
-$('select').on('click','option',function(){
-  console.log('proof')
-})
+
+$('select').on('change', showPickture)
+function showPickture () {
+  $('h2').hide();
+  $('p').hide();
+  $('img').hide();
+  let select = $(this).val();
+  console.log(select)
+  $(`.${select}`).show();
+}
 
 // function clickff() {
 //   console.log('proof of life')
