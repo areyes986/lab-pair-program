@@ -1,8 +1,9 @@
 'use strict';
 
-//// make an constrcutor that takes in object. 
+//// make an constrcutor that takes in object.
 
 const animalArray = [];
+const keywordArray = [];
 
 function AnimalHorns (animObj) {
   this.image_url = animObj.image_url;
@@ -10,8 +11,10 @@ function AnimalHorns (animObj) {
   this.description = animObj.description;
   this.keyword = animObj.keyword;
   this.horns = animObj.horns;
+  // this.select();
 
   animalArray.push(this);
+  keywordArray.push(this.keyword)
 }
 
 
@@ -26,21 +29,39 @@ AnimalHorns.prototype.render = function() {
   $newSection.find('p').text(this.description);
   $newSection.find('p').text(this.horns);
 
-
   $('main').append($newSection)
-
 }
 
 
 //// get info using .ajax
-$.ajax('./data/page-1.json', {method: "GET", dataType: "JSON"})
-  .then(data => data.forEach( function(animal){
-    let aHorn = new AnimalHorns (animal);
-    aHorn.render();
-  }));
+$.ajax('./data/page-1.json', {method: 'GET', dataType: 'JSON'})
+  .then(data => {
+    data.forEach( function(animal){
+      let aHorn = new AnimalHorns (animal);
+      aHorn.render();
+    })
+    hello();
+  });
 
 
-///// loop through the objects
+////// create select element - contains option element from JSON file
 
 
-//// render it to the page 
+// AnimalHorns.prototype.select =
+function hello() {
+  const selectOptions = $('#select').html();
+  keywordArray.forEach( arr => {
+    const $newOption = $('<option></option>');
+    $newOption.html(selectOptions);
+    $newOption.find('option').text(arr)
+    $('select').append($newOption)
+  })
+}
+
+
+
+
+///// create eventhandler when user clicks, shows selected keyword and hides others
+
+
+
