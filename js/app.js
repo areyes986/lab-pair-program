@@ -62,6 +62,18 @@ function hello() {
   })
 }
 
+$('select').on('click','option',function(){
+  console.log('proof')
+})
+
+// function clickff() {
+//   console.log('proof of life')
+// }
+
+// $('#select').on('click', 'option', clickff)
+
+
+
 
 
 
