@@ -61,3 +61,6 @@ Start time: 10:40 AM
 Finish time: 12:20PM
 
 Actual time needed to complete: _____
+
+## Resources ##  
+[Handlebars.js](https://handlebarsjs.com/guide/#installation)
