@@ -35,7 +35,7 @@ function readJSON(num){
       data.forEach( function(animal){
         let aHorn = new AnimalHorns (animal);
         let animalHorna = aHorn.render();
-        $('#photo-template').append(animalHorna);
+        $('#photo-container').append(animalHorna);
       })
       generateKeywords();
       generateDropDown();
@@ -76,7 +76,7 @@ function showPickture () {
 ///////// event handler for the different pages
 $('ul').on('click','li', nextPage)
 function nextPage() {
-  $('#photo-template').empty()
+  $('#photo-container').empty()
   let select = $(this).val();
   if (select === 1){
     readJSON(1);

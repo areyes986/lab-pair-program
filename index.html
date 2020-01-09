@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="./css/module.css">
     <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
     <script id="allHorns" type="text/x-handlebars-template">
+      <section>
         <h2 class"click">{{title}}</h2>
         <img src={{image_url}} alt={{title}} class="click">
         <p class="click">Decription: {{description}}</p>
         <p id='horn' class="click">Number of horns: {{horns}}</p>
+      </section>
     </script>
   </head>
   <body>
@@ -30,11 +32,7 @@
         <option value="default"#>Filter by Keyword</option>
       </select>
     </header>
-    <main>
-      <section id="photo-template">
-
-      </section>
-    </main>
+    <main id="photo-container"></main>
     <footer>
       &copy; 2018 Code Fellows
     </footer>
