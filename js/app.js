@@ -26,8 +26,8 @@ AnimalHorns.prototype.render = function() {
   $newSection.find('h2').text(this.title);
   $newSection.find('img').attr('src', this.image_url);
   $newSection.find('img').attr('alt', this.title);
-  $newSection.find('p').text(this.description);
   $newSection.find('p').text(this.horns);
+  $newSection.find('#horn').text(this.description);
   $newSection.find('img').attr('class', this.keyword);
 
   $('main').append($newSection)
@@ -72,6 +72,9 @@ function showPickture () {
   let select = $(this).val();
   console.log(select)
   $(`.${select}`).show();
+  // if (select === 'Filter by Keyword') {
+    
+  // }
 }
 
 // function clickff() {

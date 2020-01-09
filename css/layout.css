@@ -1,0 +1,35 @@
+* {
+    font-family: 'Righteous', cursive;
+}
+
+img {
+    width:300px;
+}
+
+img {
+    float:left;
+}
+/*
+p {
+    clear:left;
+    width:300px;
+}
+
+h2 {
+    width:300px;
+}
+ */
+
+main{
+    overflow: hidden;
+}
+
+section {
+     float: left;
+     width: 300px;
+ }
+
+section:nth-child(3n) {
+    float: right
+}
+
