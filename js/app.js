@@ -1,10 +1,11 @@
 'use strict';
 
-//// make an constrcutor that takes in object.
 
 const animalArray = [];
 let keywordArray = [];
 let click = 0;
+
+//// make an constrcutor that takes in object.
 
 function AnimalHorns (animObj) {
   this.image_url = animObj.image_url;
@@ -18,30 +19,23 @@ function AnimalHorns (animObj) {
   // keywordArray.push(this.keyword)
 }
 
-
-///make a prototype to append
+///// rendering information to the page using handlebars
 AnimalHorns.prototype.render = function() {
-  const photoTemplate = $('#photo-template').html();
-  const $newSection = $(`<section class="${click}"></section>`);
-  $newSection.html(photoTemplate);
-  $newSection.find('h2').text(this.title);
-  $newSection.find('img').attr('src', this.image_url);
-  $newSection.find('img').attr('alt', this.title);
-  $newSection.find('p').text(this.horns);
-  $newSection.find('#horn').text(this.description);
-  $newSection.find('img').attr('class', this.keyword);
-
-  $('main').append($newSection)
+  const source = $("#allHorns").html();
+  let template = Handlebars.compile(source);
+  // $('#photo-template').append(template)
+  return template(this)
 }
 
 
-//// get info using .ajax
+//// get info using .ajax and calling the dropdown and keywords functions
 function readJSON(num){
   $.ajax(`./data/page-${num}.json`, {method: 'GET', dataType: 'JSON'})
     .then(data => {
       data.forEach( function(animal){
         let aHorn = new AnimalHorns (animal);
-        aHorn.render();
+        let animalHorna = aHorn.render();
+        $('#photo-template').append(animalHorna);
       })
       generateKeywords();
       generateDropDown();
@@ -49,8 +43,7 @@ function readJSON(num){
 }
 
 
-////// create select element - contains option element from JSON file
-
+////////// generate keywords func
 function generateKeywords(){
   animalArray.forEach(animal => {
     if(!keywordArray.includes(animal.keyword)){
@@ -59,6 +52,7 @@ function generateKeywords(){
   })
 }
 
+////////// generate dropdown func
 function generateDropDown(){
   const selectEl = $('#select');
   selectEl.empty();
@@ -68,6 +62,8 @@ function generateDropDown(){
   })
 }
 
+
+//////// event handler for the drop down
 $('select').on('change', showPickture)
 function showPickture () {
   $('h2').hide();
@@ -77,14 +73,11 @@ function showPickture () {
   $(`.${select}`).show();
 }
 
-///////// add li event handler to render different json files
-
+///////// event handler for the different pages
 $('ul').on('click','li', nextPage)
 function nextPage() {
-  $(`.${click}`).hide();
-  console.log(keywordArray);
+  $('#photo-template').empty()
   let select = $(this).val();
-  console.log(select)
   if (select === 1){
     readJSON(1);
   } else if (select === 2) {
@@ -93,13 +86,6 @@ function nextPage() {
 }
 
 readJSON(1);
-
-
-
-
-
-
-///// create eventhandler when user clicks, shows selected keyword and hides others
 
 
 
