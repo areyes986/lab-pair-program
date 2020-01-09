@@ -2,6 +2,17 @@
     font-family: 'Righteous', cursive;
 }
 
+ul {
+    display: flex;
+}
+
+li {
+    font-size: 1.5em;
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+}
+
 img {
     width:300px;
 }
@@ -9,16 +20,6 @@ img {
 img {
     float:left;
 }
-/*
-p {
-    clear:left;
-    width:300px;
-}
-
-h2 {
-    width:300px;
-}
- */
 
 main{
     overflow: hidden;
