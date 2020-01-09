@@ -26,8 +26,9 @@ AnimalHorns.prototype.render = function() {
   $newSection.find('h2').text(this.title);
   $newSection.find('img').attr('src', this.image_url);
   $newSection.find('img').attr('alt', this.title);
-  $newSection.find('p').text(this.description);
   $newSection.find('p').text(this.horns);
+  $newSection.find('#horn').text(this.description);
+  $newSection.find('img').attr('class', this.keyword);
 
   $('main').append($newSection)
 }
@@ -62,9 +63,19 @@ function hello() {
   })
 }
 
-$('select').on('click','option',function(){
-  console.log('proof')
-})
+
+$('select').on('change', showPickture)
+function showPickture () {
+  $('h2').hide();
+  $('p').hide();
+  $('img').hide();
+  let select = $(this).val();
+  console.log(select)
+  $(`.${select}`).show();
+  // if (select === 'Filter by Keyword') {
+    
+  // }
+}
 
 // function clickff() {
 //   console.log('proof of life')
