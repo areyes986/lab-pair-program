@@ -66,10 +66,11 @@ function generateDropDown(){
 //////// event handler for the drop down
 $('select').on('change', showPickture)
 function showPickture () {
-  $('h2').hide();
-  $('p').hide();
-  $('img').hide();
+  $('section').hide();
+  // $('p').hide();
+  // $('img').hide();
   let select = $(this).val();
+  console.log(select)
   $(`.${select}`).show();
 }
 

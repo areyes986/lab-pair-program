@@ -6,6 +6,7 @@ h1 {
 
 ul {
     display: flex;
+    background-color: red;
 }
 
 li {
@@ -13,6 +14,8 @@ li {
     width: 50%;
     text-align: center;
     padding: 5px;
+    box-sizing: border-box;
+    border: black 2px solid;
 }
 
 img {
@@ -30,3 +33,11 @@ section {
     width: 30%;
     margin: 1%;
 }
+
+select {
+    width: 15%;
+    height: 10%;
+    font-size: 20px;
+}
+
+
