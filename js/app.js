@@ -1,7 +1,8 @@
 'use strict';
 
 
-const animalArray = [];
+let animalArray = [];
+let buttonAnimalArray = [];
 let keywordArray = [];
 
 //// make an constrcutor that takes in object.
@@ -66,8 +67,6 @@ function generateDropDown() {
 $('select').on('change', showPickture)
 function showPickture() {
   $('section').hide();
-  // $('p').hide();
-  // $('img').hide();
   let select = $(this).val();
   console.log(select)
   $(`.${select}`).show();
@@ -82,42 +81,57 @@ function nextPage() {
     readJSON(1);
   } else if (select === 2) {
     readJSON(2);
+    sortButtons('horns')
   }
 }
 
-readJSON(1);
+
 
 //////// event handler for sorting through title
-$(document).ready(() => {
+
+
+
+
+
+function buttonRender() {
   $('button').click(function (e) {
     e.preventDefault();
-
     let select = $(this).val();
     if (select === 'sortByHorns') {
-      $('#photo-container').empty()
       sortButtons('horns');
-      let animalHorna = animalArray.render();
-      $('#photo-container').append(animalHorna);
+    } else {
+      sortButtons('title')
     }
   })
-})
+}
 
 const sortButtons = (str) => {
-  let sortHorn = animalArray.horns;
-  console.log(sortHorn[1])
-  // if (str === 'horns') {
-  //   animalArray.horns.sort((a, b) => {
-  //     return a - b;
-  //   })
-  // } else {
-  //   animalArray.title.sort((a, b) => {
-  //     return a < b ? -1 : 1;
-  //   })
-  // }
+  $('#photo-container').empty()
+  if (str === 'horns') {
+    animalArray.sort((a, b) => {
+      return a.horns - b.horns;
+    })
+    animalArray.forEach(animal => {
+      let aHorn = new AnimalHorns(animal);
+      let animalHorna = aHorn.render();
+      $('#photo-container').append(animalHorna);
+    })
+    animalArray = []
+  } else {
+    animalArray.sort((a, b) => {
+      return a.title < b.title ? -1 : 1;
+    })
+    animalArray.forEach(animal => {
+      let aHorn = new AnimalHorns(animal);
+      let animalHorna = aHorn.render();
+      $('#photo-container').append(animalHorna);
+    })
+    animalArray = []
+  }
 }
 
 
 //////// event handler for sorting by # of horns
-
-
-
+readJSON(1);
+buttonRender()
+sortButtons('horns')
