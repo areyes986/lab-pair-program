@@ -2,15 +2,16 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>The Gallery of Horns</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/base.css">
-    <link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/module.css">
-    <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
-    <script id="allHorns" type="text/x-handlebars-template">
+
+<head>
+  <title>The Gallery of Horns</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/module.css">
+  <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+  <script id="allHorns" type="text/x-handlebars-template">
       <section class={{keyword}}>
         <h2>{{title}}</h2>
         <img src={{image_url}} alt={{title}}>
@@ -18,26 +19,34 @@
         <p id='horn'>Number of horns: {{horns}}</p>
       </section>
     </script>
-  </head>
-  <body>
-    <header>
-      <h1>The Gallery of Horns</h1>
-      <nav>
-        <ul>
-          <li value="1">Page One</li>
-          <li value="2">Page Two</li>
-        </ul>
-      </nav>
+</head>
+
+<body>
+  <header>
+    <h1>The Gallery of Horns</h1>
+    <nav>
+      <ul>
+        <li value="1">Page One</li>
+        <li value="2">Page Two</li>
+      </ul>
+    </nav>
+    <div>
       <select id="select">
-        <option value="default"#>Filter by Keyword</option>
+        <option value="default" #>Filter by Keyword</option>
       </select>
-    </header>
-    <main id="photo-container"></main>
-    <footer>
-      &copy; 2018 Code Fellows
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>  
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>  
-    <script src="./js/app.js"></script>
-  </body>
+      <form id="sortingButtons" action="">
+        <button value="sortByTitle">Sort by Title</button>
+        <button value="sortByHorns">Sort By # of Horns</button>
+      </form>
+    </div>
+  </header>
+  <main id="photo-container"></main>
+  <footer>
+    &copy; 2018 Code Fellows
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+
 </html>
