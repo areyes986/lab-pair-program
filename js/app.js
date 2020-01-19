@@ -1,7 +1,7 @@
 'use strict';
 
 
-const animalArray = [];
+let animalArray = [];
 let keywordArray = [];
 
 //// make an constrcutor that takes in object.
@@ -28,9 +28,38 @@ AnimalHorns.prototype.render = function () {
 
 
 //// get info using .ajax and calling the dropdown and keywords functions
-function readJSON(num) {
-  $.ajax(`./data/page-${num}.json`, { method: 'GET', dataType: 'JSON' })
+function readJSON(type) {
+  if ($('html').hasClass('page1')) {
+    $.ajax('./data/page-1.json', { method: 'GET', dataType: 'JSON' })
+      .then(data => {
+        if (type==='title') {
+          data.sort((a, b) => {
+            return a.title < b.title ? -1 : 1;
+          })
+        }else {
+          data.sort((a, b) => {
+            return a.horns - b.horns
+          })
+        }
+        data.forEach(function (animal) {
+          let aHorn = new AnimalHorns(animal);
+          let animalHorna = aHorn.render();
+          $('#photo-container').append(animalHorna);
+        })
+        generateKeywords();
+        generateDropDown();
+      });
+  } else {$.ajax('./data/page-2.json', { method: 'GET', dataType: 'JSON' })
     .then(data => {
+      if (type==='title') {
+        data.sort((a, b) => {
+          return a.title < b.title ? -1 : 1;
+        })
+      }else {
+        data.sort((a, b) => {
+          return a.horns - b.horns
+        })
+      }
       data.forEach(function (animal) {
         let aHorn = new AnimalHorns(animal);
         let animalHorna = aHorn.render();
@@ -39,7 +68,9 @@ function readJSON(num) {
       generateKeywords();
       generateDropDown();
     });
+  }
 }
+
 
 
 ////////// generate keywords func
@@ -66,8 +97,6 @@ function generateDropDown() {
 $('select').on('change', showPickture)
 function showPickture() {
   $('section').hide();
-  // $('p').hide();
-  // $('img').hide();
   let select = $(this).val();
   console.log(select)
   $(`.${select}`).show();
@@ -76,48 +105,44 @@ function showPickture() {
 ///////// event handler for the different pages
 $('ul').on('click', 'li', nextPage)
 function nextPage() {
-  $('#photo-container').empty()
   let select = $(this).val();
-  if (select === 1) {
-    readJSON(1);
-  } else if (select === 2) {
-    readJSON(2);
+  if (!$('html').hasClass(`page${select}`)) {
+  $('html').toggleClass('page1 page2')
   }
+  $('#photo-container').empty()
+  readJSON();
 }
 
-readJSON(1);
+
 
 //////// event handler for sorting through title
-$(document).ready(() => {
+
+function buttonRender() {
   $('button').click(function (e) {
     e.preventDefault();
-
     let select = $(this).val();
     if (select === 'sortByHorns') {
-      $('#photo-container').empty()
       sortButtons('horns');
-      let animalHorna = animalArray.render();
-      $('#photo-container').append(animalHorna);
+    } else {
+      sortButtons('title')
     }
   })
-})
+}
+
 
 const sortButtons = (str) => {
-  let sortHorn = animalArray.horns;
-  console.log(sortHorn[1])
-  // if (str === 'horns') {
-  //   animalArray.horns.sort((a, b) => {
-  //     return a - b;
-  //   })
-  // } else {
-  //   animalArray.title.sort((a, b) => {
-  //     return a < b ? -1 : 1;
-  //   })
-  // }
+  animalArray=[];
+  $('#photo-container').empty();
+  if (str === 'horns') {
+    readJSON('horns')
+  } else {
+    readJSON('title')
+  }
 }
 
 
 //////// event handler for sorting by # of horns
-
-
+$('html').addClass('page1')
+readJSON('horns');
+buttonRender()
 
